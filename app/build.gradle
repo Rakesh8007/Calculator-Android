@@ -10,7 +10,7 @@ if (keystorePropertiesFile.exists()) {
 }
 
 android {
-    compileSdkVersion 23
+    compileSdkVersion 29
     buildToolsVersion 
 
     defaultConfig {
