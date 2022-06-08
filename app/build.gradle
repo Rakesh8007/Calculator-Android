@@ -10,35 +10,28 @@ if (keystorePropertiesFile.exists()) {
 }
 
 android {
-   # compileSdkVersion 29
-   # buildToolsVersion
-    
-     buildToolsVersion = "29.0.2"
-    minSdkVersion = 21
-    compileSdkVersion = 29
-    targetSdkVersion = 29
-    googlePlayServicesAuthVersion = "16.0.1"
-    androidXCore = "1.6.0"
-}
- #   defaultConfig {
-  #     minSdkVersion 19
-   #     targetSdkVersion 29
-   #     versionCode 1
-    #    versionName "1.0"
-    #    setProperty("archivesBaseName", "calculator")
-   # }
+    compileSdkVersion rootProject.compileSdkVersion
+    buildFeatures {
+        dataBinding true
+    }
+    defaultConfig {
+        applicationId "com.google.samples.apps.sunflower"
+        minSdkVersion rootProject.minSdkVersion
+        targetSdkVersion rootProject.targetSdkVersion
+        testInstrumentationRunner "com.google.samples.apps.sunflower.utilities.MainTestRunner"
+        versionCode 1
+        versionName "0.1.6"
+        vectorDrawables.useSupportLibrary true
 
-    signingConfigs {
-        if (keystorePropertiesFile.exists()) {
-            release {
-                keyAlias keystoreProperties['keyAlias']
-                keyPassword keystoreProperties['keyPassword']
-                storeFile file(keystoreProperties['storeFile'])
-                storePassword keystoreProperties['storePassword']
+        // Consult the README on instructions for setting up Unsplash API key
+        buildConfigField("String", "UNSPLASH_ACCESS_KEY", "\"" + getUnsplashAccess() + "\"")
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments["dagger.hilt.disableModulesHaveInstallInCheck"] = "true"
             }
         }
     }
-
+    
     buildTypes {
         debug {
             applicationIdSuffix ".debug"
